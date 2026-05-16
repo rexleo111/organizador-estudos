@@ -2,7 +2,7 @@ name: CI - Lint e Testes
 
 on:
   push:
-    branches: [main]
+    branches: [main, entrega-intermediaria]
   pull_request:
     branches: [main]
 

@@ -1,10 +1,14 @@
+# Organizador de Estudos
+
+Aplicacao publicada: https://organizador-estudos-9mlh.onrender.com
+
 ## Descricao do Problema
 
 Muitos estudantes, tanto no ensino medio quanto no superior, tem dificuldade para manter uma rotina de estudos organizada. Sem um planejamento minimo, e comum acumular materia, perder prazos e acabar estudando de forma desorganizada. Esse problema atinge especialmente quem nao tem acesso a aplicativos pagos ou plataformas mais completas de produtividade.
 
 ## Proposta da Solucao
 
-O Organizador de Estudos e uma aplicacao de linha de comando que permite cadastrar tarefas de estudo por disciplina, acompanhar o que ja foi feito e o que ainda esta pendente, definir prazos e ter uma visao geral do progresso. A ideia e oferecer algo simples, leve e que funcione sem internet.
+O Organizador de Estudos e uma aplicacao de linha de comando (e tambem web) que permite cadastrar tarefas de estudo por disciplina, acompanhar o que ja foi feito e o que ainda esta pendente, definir prazos e ter uma visao geral do progresso. Ao abrir, o programa exibe uma frase motivacional obtida de uma API publica, para incentivar o estudante.
 
 ## Publico-alvo
 
@@ -18,6 +22,8 @@ Estudantes com dificuldade de organizacao, pessoas que preferem ferramentas de t
 - Remover tarefa
 - Ver resumo geral com contagem por disciplina
 - Persistencia automatica em arquivo JSON
+- Frase motivacional ao abrir (via API publica zenquotes.io)
+- Interface web com Flask (alem da CLI)
 
 ## Tecnologias
 
@@ -26,6 +32,13 @@ Estudantes com dificuldade de organizacao, pessoas que preferem ferramentas de t
 - Ruff (linting)
 - GitHub Actions (CI)
 - JSON para armazenamento local
+- requests (consumo de API)
+- Flask (interface web)
+- Render (deploy)
+
+## API Publica Utilizada
+
+A aplicacao consome a API do zenquotes.io (https://zenquotes.io) para exibir uma frase motivacional aleatoria ao usuario. A requisicao e feita via HTTP GET ao endpoint /api/random. Caso a API esteja fora do ar ou a conexao falhe, o programa continua funcionando normalmente, apenas sem exibir a frase.
 
 ## Instalacao
 
@@ -47,16 +60,29 @@ pip install -r requirements.txt
 
 ## Como executar
 
+### CLI (terminal)
+
 ```bash
 python -m src.main
 ```
 
-Ao rodar, o programa exibe um menu no terminal:
+### Web (Flask)
+
+```bash
+python -m src.app
+```
+
+Acesse http://localhost:5000 no navegador.
+
+### Exemplo de uso (CLI)
 
 ```
 ==================================================
-  Organizador de Estudos  v1.0.0
+  Organizador de Estudos  v1.1.0
 ==================================================
+
+  "The only way to do great work is to love what you do."
+  - Steve Jobs
 
 --- MENU ---
 [1] Adicionar tarefa
@@ -96,7 +122,7 @@ ruff check src/ tests/ --fix
 
 ## Versao atual
 
-1.0.0
+1.1.0
 
 ## Autor
 

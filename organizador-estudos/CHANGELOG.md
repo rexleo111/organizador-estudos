@@ -2,6 +2,23 @@
 
 Registro de mudancas do projeto.
 
+## [1.1.0] - 2026-05-16
+
+### Adicionado
+
+- Integracao com API publica zenquotes.io para frases motivacionais
+- Interface web com Flask
+- Frase motivacional exibida ao abrir o CLI e na pagina web
+- 4 testes de integracao para o modulo de frases (sucesso, API offline, JSON invalido, timeout)
+- Deploy da aplicacao no Render
+- Procfile para deploy com gunicorn
+- Dependencias: requests, flask, gunicorn
+
+### Alterado
+
+- README atualizado com link do deploy e documentacao da API
+- Versao atualizada para 1.1.0
+
 ## [1.0.0] - 2026-04-12
 
 ### Adicionado
