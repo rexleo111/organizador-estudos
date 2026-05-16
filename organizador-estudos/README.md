@@ -1,6 +1,6 @@
 # Organizador de Estudos
 
-Aplicacao publicada: https://SEU-APP.onrender.com
+Aplicacao publicada: https://organizador-estudos-9mlh.onrender.com
 
 ## Descricao do Problema
 
