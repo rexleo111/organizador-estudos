@@ -4,6 +4,7 @@ import sys
 
 from src import __version__
 from src.manager import TaskManager
+from src.quotes import fetch_quote
 from src.storage import load_tasks, save_tasks
 
 
@@ -12,6 +13,11 @@ def print_header():
     print("=" * 50)
     print(f"  Organizador de Estudos  v{__version__}")
     print("=" * 50)
+
+    quote = fetch_quote()
+    if quote:
+        print(f'\n  "{quote["text"]}"')
+        print(f"  - {quote['author']}")
 
 
 def print_menu():
