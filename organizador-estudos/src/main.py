@@ -4,7 +4,7 @@ import sys
 
 from src import __version__
 from src.manager import TaskManager
-from src.quotes import fetch_quote
+from src.quotes import fetch_quote, translate_quote
 from src.storage import load_tasks, save_tasks
 
 
@@ -16,8 +16,15 @@ def print_header():
 
     quote = fetch_quote()
     if quote:
-        print(f'\n  "{quote["text"]}"')
-        print(f"  - {quote['author']}")
+            # Tenta traduzir o texto original usando a função translate_quote
+            texto_traduzido = translate_quote(quote["text"])
+        
+            # Se texto_traduzido não for None, usa ele. Se for, usa o original.
+            texto_final = texto_traduzido if texto_traduzido else quote["text"]
+
+            print(f'\n  "{texto_final}"')
+            print(f"  - {quote['author']}")
+            print("\n" + "=" * 50)
 
 
 def print_menu():

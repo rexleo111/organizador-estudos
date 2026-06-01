@@ -25,3 +25,27 @@ def fetch_quote():
         pass
 
     return None
+
+
+def translate_quote(text, target_lang="pt"):
+    
+    url = "https://api.mymemory.translated.net/get"
+
+    params = {
+        "q": text,
+        "langpair": f"en|{target_lang}",
+    }
+    
+    try:
+        response = requests.get(url, params=params, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        
+        # A MyMemory coloca a tradução dentro de responseData -> translatedText
+        if "responseData" in data and "translatedText" in data["responseData"]:
+            return data["responseData"]["translatedText"]
+            
+    except (requests.RequestException, ValueError, KeyError):
+        pass
+        
+    return None
