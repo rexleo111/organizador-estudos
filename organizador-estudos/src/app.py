@@ -3,7 +3,7 @@
 from flask import Flask, redirect, render_template_string, request, url_for
 
 from src.manager import TaskManager
-from src.quotes import fetch_quote
+from src.quotes import fetch_quote, translate_quote
 from src.storage import load_tasks, save_tasks
 
 app = Flask(__name__)
@@ -154,7 +154,18 @@ PAGE_TEMPLATE = """
 @app.route("/")
 def index():
     quote = fetch_quote()
+    
+    if quote:
+
+        texto_traduzido = translate_quote(quote["text"])
+        
+        # Se a API de tradução retornar sucesso, substitui o texto em inglês
+        # Se falhar (retornar None), o if é ignorado e o texto original em inglês é mantido
+        if texto_traduzido:
+            quote["text"] = texto_traduzido
+
     summary = manager.get_summary()
+    
     return render_template_string(
         PAGE_TEMPLATE,
         tasks=manager.tasks,
