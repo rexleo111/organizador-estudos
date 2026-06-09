@@ -2,6 +2,16 @@
 
 Registro de mudancas do projeto.
 
+## [1.2.0] - 2026-06-09
+
+### Adicionado
+- Integração com Banco de Dados em nuvem (MongoDB Atlas).
+- Configuração de variáveis de ambiente (`.env`) para segurança da string de conexão.
+
+### Alterado
+- O armazenamento de tarefas passou de arquivo `.json` local para nuvem.
+- `README.md` atualizado com instruções de `.env` e equipe de desenvolvimento.
+
 ## [1.1.0] - 2026-05-16
 
 ### Adicionado

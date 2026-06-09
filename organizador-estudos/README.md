@@ -31,7 +31,7 @@ Estudantes com dificuldade de organizacao, pessoas que preferem ferramentas de t
 - pytest (testes)
 - Ruff (linting)
 - GitHub Actions (CI)
-- JSON para armazenamento local
+- MongoDB Atlas (Banco de Dados em Nuvem)
 - requests (consumo de API)
 - Flask (interface web)
 - Render (deploy)
@@ -57,6 +57,13 @@ venv\Scripts\activate           # Windows
 # Instale as dependencias
 pip install -r requirements.txt
 ```
+
+# Instale as dependencias
+pip install -r requirements.txt
+
+# Configuração do Banco de Dados
+Crie um arquivo chamado `.env` na raiz do projeto e adicione a sua URI do MongoDB:
+MONGO_URI="sua_string_de_conexao_aqui"
 
 ## Como executar
 
@@ -135,3 +142,7 @@ https://github.com/rexleo111/organizador-estudos
 ## Licenca
 
 MIT
+
+## Equipe de Desenvolvimento
+- Leonardo Cespedes P. Huard
+- Joao Vitor M. Peres
