@@ -1,38 +1,46 @@
-"""Módulo de armazenamento em JSON."""
+"""Módulo de armazenamento no Banco de Dados MongoDB."""
 
-import json
-from pathlib import Path
+import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
-DATA_FILE = Path("data/tasks.json")
+load_dotenv()
+
+MONGO_URI = os.getenv("MONGO_URI")
+client = MongoClient(MONGO_URI)
+
+db = client["organizador_db"]
+collection = db["tarefas_state"]
 
 
 def load_tasks():
-    """Carrega tarefas do arquivo JSON.
+    """Carrega tarefas do MongoDB.
 
     Returns:
         Tupla (tasks, next_id) com a lista de tarefas e o próximo ID.
     """
-    if not DATA_FILE.exists():
-        return [], 1
+    try:
+        documento = collection.find_one({"_id": "estado_geral"})
+        if documento:
+            return documento.get("tasks", []), documento.get("next_id", 1)
+    except Exception as e:
+        print(f"Erro ao conectar no banco: {e}")
 
-    with open(DATA_FILE, encoding="utf-8") as f:
-        data = json.load(f)
-
-    tasks = data.get("tasks", [])
-    next_id = data.get("next_id", 1)
-    return tasks, next_id
+    return [], 1
 
 
 def save_tasks(tasks, next_id):
-    """Salva tarefas no arquivo JSON.
+    """Salva tarefas no MongoDB.
 
     Args:
         tasks: Lista de tarefas.
         next_id: Próximo ID disponível.
     """
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-    data = {"next_id": next_id, "tasks": tasks}
-
-    with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    try:
+        collection.update_one(
+            {"_id": "estado_geral"},
+            {"$set": {"tasks": tasks, "next_id": next_id}},
+            upsert=True
+        )
+    except Exception as e:
+        print(f"Erro ao salvar no banco: {e}")
